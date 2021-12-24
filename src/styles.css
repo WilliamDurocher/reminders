@@ -175,9 +175,9 @@ border: solid 1px black;
 
 }
 
-/*add reminder modal*/
+/*add reminder/list modal*/
 
-.modal-add-reminder-container{
+.modal-add-reminder-container, .modal-add-list-container{
     display: none;
     position: fixed;
     left: 0;
@@ -193,7 +193,7 @@ border: solid 1px black;
     transition: all 0.3s linear;
 }
 
-.modal-add-reminder{
+.modal-add-reminder, .modal-add-list{
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -203,6 +203,6 @@ border: solid 1px black;
     
 }
 
-.modal-add-reminder-close:hover{
+.modal-list-close, .modal-reminder-close:hover{
     cursor: pointer;
   }

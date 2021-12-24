@@ -6,7 +6,7 @@ const createList = (title) => {
     allLists.push({
         title,
         reminders: [],
-        active: true,
+        active: allLists.size > 1 ? false: true,
     });
     showLists();
     showListHeader();
@@ -22,8 +22,7 @@ const createReminder = (title, dueDate, priority) => {
         priority,
         checked: false
     });
-    
-    showReminders();
+showReminders();
 };
 
 
