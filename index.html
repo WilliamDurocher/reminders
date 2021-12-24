@@ -18,16 +18,37 @@
         <div class="main-container">
             <div class="side-menu">
                 <div class="group-card">
-                    <div class="group-item">groceries</div>
+
+                </div>
+                <div class="side-footer">
+                    <div class="new-list">Add List</div>
                 </div>
             </div>
             <div class="main-menu">
-                <div class="main-header"></div>
-                <div class="main-body"></div>
-
-                <div class="main-footer"></div>
+                <div class="main-header">
+                </div>
+                <div class="main-body">
+                </div>
+                <div class="main-footer">
+                    <div class="new-reminder">Add Reminder</div>
+                </div>
 
             </div>
+        </div>
+    </div>
+    <div class="modal-add-reminder-container">
+        <div class="modal-add-reminder">
+            <span class="modal-add-reminder-close">&times;</span>
+            <form class="modal-content" id="form" action='/app.js'>
+                <h1>Add a new reminder</h1>
+                <div id='textInput'>
+                    <p><input type='text' id='title' name='title' placeholder='Remind me of...' required></p>
+                    <p><input type='text' id='due' name='due' placeholder='Due on...' required></p>
+                    <p><input type='text' id='priority' name='priority' placeholder='priority'></p>
+    
+                </div>
+                <button type='submit' form='form' id="add-reminder">Add</button>
+            </form>
         </div>
     </div>
     <script src="main.js"></script>
