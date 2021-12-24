@@ -38,8 +38,8 @@
     </div>
     <div class="modal-add-reminder-container">
         <div class="modal-add-reminder">
-            <span class="modal-add-reminder-close">&times;</span>
-            <form class="modal-content" id="form" action='/app.js'>
+            <span class="modal-reminder-close">&times;</span>
+            <form class="modal-content" id="reminderform" action='/app.js'>
                 <h1>Add a new reminder</h1>
                 <div id='textInput'>
                     <p><input type='text' id='title' name='title' placeholder='Remind me of...' required></p>
@@ -47,7 +47,19 @@
                     <p><input type='text' id='priority' name='priority' placeholder='priority'></p>
     
                 </div>
-                <button type='submit' form='form' id="add-reminder">Add</button>
+                <button type='submit' form='reminderform' id="add-reminder">Add</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-add-list-container">
+        <div class="modal-add-list">
+            <span class="modal-list-close">&times;</span>
+            <form class="modal-content" id="listform" action='/app.js'>
+                <h1>Add a new List</h1>
+                <div id='textInput'>
+                    <p><input type='text' id='title' name='title' placeholder='List Name...' required></p> 
+                </div>
+                <button type='submit' form='listform' id="add-list">Add</button>
             </form>
         </div>
     </div>
