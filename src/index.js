@@ -1,2 +1,13 @@
 import './styles.css';
-import UI from './ui'
+import {createList, createReminder} from './logic';
+import {showLists, showListHeader, showReminders} from './ui';
+
+let allLists = [];
+
+//todo: new list = create list, push into all list, render on the UI
+createList("new List");
+createReminder("new reminder", "2021-12-31", "low");
+showReminders();
+
+
+export {allLists};
