@@ -1,5 +1,5 @@
 import { allLists } from './index';
-import { activeList, createList, createReminder } from './logic';
+import { activeList, createList, createReminder, removeReminder } from './logic';
 
 
 const listContainer = document.querySelector('.group-card');
@@ -46,12 +46,13 @@ function setActiveList(list){
 }
 
 function showListHeader() {
-    //TODO: put list title in active reminders list
+    listNameActive.innerText = activeList().title;
+
 }
 
 function showReminders() {
     clearReminders();
-    listNameActive.innerText = activeList().title;
+    showListHeader();
 
 
     activeList().reminders.forEach((item, index) => {
@@ -66,6 +67,14 @@ function showReminders() {
         const checkIcon = document.createElement('span');
         checkIcon.classList.add('checkmark');
         reminder.appendChild(checkIcon);
+
+        const removeBtn = document.createElement('div');
+        removeBtn.classList.add('remove-reminder');
+        removeBtn.innerText = 'remove';
+        removeBtn.addEventListener('click', () => {
+            removeReminder(item.title, item.due, item.priority)
+        });
+        reminder.appendChild(removeBtn);
 
         remindersContainer.appendChild(reminder);
         //TODO: generate reminders here, (title, date, completed status, etc)
@@ -90,7 +99,6 @@ function newListForm() {
 
 function submitListForm() {
 
-    event.preventDefault();
     addListModalContainer.style.display = 'none';
     allLists.forEach((item, index) => {
         item.active = false;
@@ -111,7 +119,6 @@ function newReminderForm() {
 
 function submitReminderForm() {
 
-    event.preventDefault();
     addReminderModalContainer.style.display = 'none';
     createReminder(reminderform.title.value, reminderform.due.value, reminderform.priority.value);
     reminderform.reset();
@@ -120,14 +127,14 @@ function submitReminderForm() {
 
 
 // shared modal functions
-
-
 addReminderModalClose.addEventListener('click', closeModal);
 addListModalClose.addEventListener('click', closeModal);
 
 function closeModal() {
     addReminderModalContainer.style.display = 'none';
     addListModalContainer.style.display = 'none';
+    listform.reset();
+    reminderform.reset();
 
 }
 

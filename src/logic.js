@@ -25,6 +25,13 @@ const createReminder = (title, dueDate, priority) => {
 showReminders();
 };
 
+const removeReminder = (title, dueDate, priority) => {
+
+    const index = activeList().reminders.indexOf({title, dueDate, priority})
+    activeList().reminders.splice(index, 1);
+    showReminders();
+};
+
 
 
 function activeList(){
@@ -32,4 +39,4 @@ function activeList(){
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList};
+export {createList, createReminder, activeList, removeReminder};

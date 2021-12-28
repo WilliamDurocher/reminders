@@ -112,7 +112,7 @@ border: solid 1px black;
 
 /* The container */
 .container {
-    display: block;
+    display: flex;
     position: relative;
     padding-left: 35px;
     margin-bottom: 12px;
@@ -157,6 +157,17 @@ border: solid 1px black;
 
   }
 
+  .remove-reminder{
+    margin-left: auto;
+    right: 0;
+    position: absolute;
+
+  }
+
+  .container:last-child {
+    margin-left: auto;
+  }
+
 /* footer */
 
 .main-footer, .side-footer{
@@ -166,7 +177,7 @@ border: solid 1px black;
     width: 100%;
     padding-left: 20px;
 }
-
+/*
 .new-reminder{
 
 }
@@ -174,7 +185,7 @@ border: solid 1px black;
 .new-list{
 
 }
-
+*/
 /*add reminder/list modal*/
 
 .modal-add-reminder-container, .modal-add-list-container{
