@@ -1,8 +1,8 @@
 import { allLists } from './index';
-import { activeList, createList, createReminder, removeReminder, updateReminder, checkReminder } from './logic';
+import { activeList, createList, createReminder, removeReminder, updateReminder, checkReminder, removeList } from './logic';
 
 
-const listContainer = document.querySelector('.group-card');
+const listsContainer = document.querySelector('.group-card');
 const listNameActive = document.querySelector('.main-header');
 const remindersContainer = document.querySelector('.main-body');
 
@@ -17,12 +17,25 @@ const addListModalClose = document.querySelector('.modal-list-close');
 function showLists() {
     clearLists();
     allLists.forEach((item, index) => {
+        const listContainer = document.createElement('div');
+        listContainer.classList.add('list-container');
+
         const list = document.createElement('div');
         list.className = 'group-item';
         list.innerText = item.title;
+        list.addEventListener('click', setActiveList);
         listContainer.appendChild(list);
 
-        list.addEventListener('click', setActiveList);
+        const removeListBtn = document.createElement('div');
+        removeListBtn.classList.add('list-remove');
+        removeListBtn.innerText = 'Del';
+        removeListBtn.addEventListener('click', () => {
+            removeList(index);
+        });
+        listContainer.appendChild(removeListBtn);
+
+
+        listsContainer.appendChild(listContainer);
 
     });
     const addListBtn = document.querySelector('.new-list');
@@ -31,7 +44,20 @@ function showLists() {
 }
 
 function clearLists() {
-    listContainer.innerHTML = '';
+    listsContainer.innerHTML = '';
+}
+
+
+//TODO: to use whenever a list is removed
+function showFirstList(){
+    allLists.forEach((item,index) => {
+        if (index == 0){
+            item.active = true;
+        }else{
+            item.active = false;
+        }
+    });
+    showReminders();
 }
 
 function setActiveList(list) {
@@ -62,6 +88,7 @@ function showReminders() {
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.checked = item.checked == true ? true: false;
         checkbox.addEventListener('change', reminderCheckChange);
         checkbox.index = index;
         reminder.appendChild(checkbox);

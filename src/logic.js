@@ -13,6 +13,11 @@ const createList = (title) => {
     showReminders();
 };
 
+const removeList = (index) => {
+    allLists.splice(index, 1);
+    showLists();
+};
+
 const createReminder = (title, dueDate, priority) => {
 //TODO Local Storage
 
@@ -39,7 +44,7 @@ showReminders();
 
 };
 
-const removeReminder = (index, title, dueDate, priority) => {
+const removeReminder = (index) => {
 
     activeList().reminders.splice(index, 1);
     showReminders();
@@ -66,4 +71,4 @@ function activeList(){
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder};
+export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList};

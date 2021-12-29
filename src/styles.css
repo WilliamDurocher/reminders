@@ -41,7 +41,17 @@ body{
     height: 100vh;
 }
 
+.list-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: space-between;
+}
 
+.list-remove{
+  margin-left: auto;
+  right: 0;
+}
 
 .side-menu{
 width: 22%;
