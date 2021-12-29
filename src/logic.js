@@ -45,6 +45,17 @@ const removeReminder = (index, title, dueDate, priority) => {
     showReminders();
 };
 
+const checkReminder = (index, reminder) => {
+
+    if (reminder.checked){
+        activeList().reminders[index].checked = true;
+    }else{
+        activeList().reminders[index].checked = false;
+
+    }
+
+};
+
 function getReminderIndex(item){
     return activeList().reminders.indexOf(item);
 }
@@ -55,4 +66,4 @@ function activeList(){
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, getReminderIndex};
+export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder};

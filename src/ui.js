@@ -1,5 +1,5 @@
 import { allLists } from './index';
-import { activeList, createList, createReminder, removeReminder, updateReminder, getReminderIndex } from './logic';
+import { activeList, createList, createReminder, removeReminder, updateReminder, checkReminder } from './logic';
 
 
 const listContainer = document.querySelector('.group-card');
@@ -62,6 +62,8 @@ function showReminders() {
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', reminderCheckChange);
+        checkbox.index = index;
         reminder.appendChild(checkbox);
 
         const checkIcon = document.createElement('span');
@@ -118,7 +120,7 @@ function submitListForm() {
 }
 
 //Add Reminder Modal functions and listeners
-function newReminderForm(event) {
+function newReminderForm() {
     addReminderModalContainer.style.display = 'block';
     const createReminderBtn = document.getElementById('add-reminder');
     createReminderBtn.removeEventListener('click', submitUpdateReminderForm);
@@ -158,9 +160,7 @@ function submitUpdateReminderForm(evt){
     const title = reminderform.title.value;
     const dueDate = reminderform.due.value;
     const priority = reminderform.priority.value;
-    const reminderToUpdate = {title, dueDate, priority};
 
-    const index = getReminderIndex(reminderToUpdate);
     event.preventDefault();
     updateReminder(evt.currentTarget.reminder, title, dueDate, priority);
 
@@ -169,6 +169,13 @@ function submitUpdateReminderForm(evt){
 
 }
 
+//checkbox change function
+
+function reminderCheckChange(evt){
+    const index = evt.currentTarget.index;
+    checkReminder(index, this);
+
+}
 
 // shared modal functions
 addReminderModalClose.addEventListener('click', closeModal);
