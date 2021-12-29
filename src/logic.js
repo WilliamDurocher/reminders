@@ -13,6 +13,17 @@ const createList = (title) => {
     showReminders();
 };
 
+const updateList = (list, newTitle) => {
+    const index = getListIndex(list);
+
+    allLists[index].title = newTitle;
+
+    showLists();
+    showListHeader();
+    showReminders();
+    console.log(allLists);
+}
+
 const removeList = (index) => {
     allLists.splice(index, 1);
     showLists();
@@ -65,10 +76,14 @@ function getReminderIndex(item){
     return activeList().reminders.indexOf(item);
 }
 
+function getListIndex(list){
+    return allLists.indexOf(list);
+}
+
 
 function activeList(){
     let activeListArray = allLists.filter(list => list.active);
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList};
+export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList};

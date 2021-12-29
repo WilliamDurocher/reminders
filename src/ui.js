@@ -1,5 +1,6 @@
 import { allLists } from './index';
-import { activeList, createList, createReminder, removeReminder, updateReminder, checkReminder, removeList } from './logic';
+import { activeList, createList, createReminder, removeReminder, updateReminder, checkReminder, removeList,
+    updateList } from './logic';
 
 
 const listsContainer = document.querySelector('.group-card');
@@ -26,11 +27,21 @@ function showLists() {
         list.addEventListener('click', setActiveList);
         listContainer.appendChild(list);
 
+
+        const editListBtn = document.createElement('div');
+        editListBtn.classList.add('list-edit');
+        editListBtn.innerText = 'Edit';
+        editListBtn.addEventListener('click', editListForm);
+        editListBtn.list = item;
+        listContainer.appendChild(editListBtn);
+
+
         const removeListBtn = document.createElement('div');
         removeListBtn.classList.add('list-remove');
         removeListBtn.innerText = 'Del';
         removeListBtn.addEventListener('click', () => {
             removeList(index);
+            showFirstList();
         });
         listContainer.appendChild(removeListBtn);
 
@@ -46,6 +57,7 @@ function showLists() {
 function clearLists() {
     listsContainer.innerHTML = '';
 }
+
 
 
 //TODO: to use whenever a list is removed
@@ -75,6 +87,53 @@ function showListHeader() {
     listNameActive.innerText = activeList().title;
 
 }
+//Add List Modal function and listeners
+function newListForm() {
+    addListModalContainer.style.display = 'block';
+    const createListBtn = document.getElementById('add-list');
+    createListBtn.removeEventListener('click', submitUpdateListForm);
+    createListBtn.addEventListener('click', submitListForm);
+
+}
+
+function editListForm(evt){
+    const list = evt.currentTarget.list;
+    const editListBtn = document.getElementById('add-list');
+
+
+    addListModalContainer.style.display = 'block';
+    listform.title.value = list.title;
+    editListBtn.innerText = 'Update';
+    editListBtn.removeEventListener('click', submitListForm);
+    editListBtn.addEventListener('click', submitUpdateListForm)
+    editListBtn.list = list;
+
+}
+
+function submitUpdateListForm(evt){
+
+    addListModalContainer.style.display = 'none';
+    const title = listform.title.value;
+    event.preventDefault();
+    updateList(evt.currentTarget.list, title);
+
+    listform.reset();
+
+}
+function submitListForm() {
+
+    addListModalContainer.style.display = 'none';
+    allLists.forEach((item, index) => {
+        item.active = false;
+
+    })
+    event.preventDefault();
+
+    createList(listform.title.value);
+    listform.reset();
+
+}
+
 
 function showReminders() {
     clearReminders();
@@ -123,27 +182,6 @@ function showReminders() {
 
 function clearReminders() {
     remindersContainer.innerHTML = '';
-}
-
-
-//Add List Modal function and listeners
-function newListForm() {
-    addListModalContainer.style.display = 'block';
-    const createListBtn = document.getElementById('add-list');
-    createListBtn.addEventListener('click', submitListForm)
-
-}
-
-function submitListForm() {
-
-    addListModalContainer.style.display = 'none';
-    allLists.forEach((item, index) => {
-        item.active = false;
-
-    })
-    createList(listform.title.value);
-    listform.reset();
-
 }
 
 //Add Reminder Modal functions and listeners

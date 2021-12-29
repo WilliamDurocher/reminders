@@ -52,6 +52,11 @@ body{
   margin-left: auto;
   right: 0;
 }
+.list-edit{
+  right: 0;
+  position: absolute;
+  padding-right: 50px;
+}
 
 .side-menu{
 width: 22%;
