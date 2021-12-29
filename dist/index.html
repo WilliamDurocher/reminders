@@ -17,30 +17,29 @@
         </header>
         <div class="main-container">
             <div class="side-menu">
-                <div class="group-card">
-
+                <div class="lists-container">
                 </div>
-                <div class="side-footer">
+                <div class="lists-footer">
                     <div class="new-list">Add List</div>
                 </div>
             </div>
             <div class="main-menu">
-                <div class="main-header">
+                <div class="reminders-header-title">
                 </div>
-                <div class="main-body">
+                <div class="reminders-container">
                 </div>
-                <div class="main-footer">
+                <div class="reminders-footer">
                     <div class="new-reminder">Add Reminder</div>
                 </div>
 
             </div>
         </div>
     </div>
-    <div class="modal-add-reminder-container">
-        <div class="modal-add-reminder">
+    <div class="modal-reminder-container">
+        <div class="modal-reminder">
             <span class="modal-reminder-close">&times;</span>
             <form class="modal-content" id="reminderform" action='/app.js'>
-                <h1>Add a new reminder</h1>
+                <h1 class="modal-reminder-title">Add a new reminder</h1>
                 <div id='textInput'>
                     <p><input type='text' id='title' name='title' placeholder='Remind me of...'></p>
                     <p><input type='text' id='due' name='due' placeholder='Due on...' ></p>
@@ -51,8 +50,8 @@
             </form>
         </div>
     </div>
-    <div class="modal-add-list-container">
-        <div class="modal-add-list">
+    <div class="modal-list-container">
+        <div class="modal-list">
             <span class="modal-list-close">&times;</span>
             <form class="modal-content" id="listform" action='/app.js'>
                 <h1>Add a new List</h1>

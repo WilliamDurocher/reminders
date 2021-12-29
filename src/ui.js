@@ -3,15 +3,15 @@ import { activeList, createList, createReminder, removeReminder, updateReminder,
     updateList } from './logic';
 
 
-const listsContainer = document.querySelector('.group-card');
-const listNameActive = document.querySelector('.main-header');
-const remindersContainer = document.querySelector('.main-body');
+const listsContainer = document.querySelector('.lists-container');
+const activeListName = document.querySelector('.reminders-header-title');
+const remindersContainer = document.querySelector('.reminders-container');
 
-const addReminderModalContainer = document.querySelector('.modal-add-reminder-container');
-const addReminderModalClose = document.querySelector('.modal-reminder-close');
+const reminderModalContainer = document.querySelector('.modal-reminder-container');
+const reminderModalClose = document.querySelector('.modal-reminder-close');
 
-const addListModalContainer = document.querySelector('.modal-add-list-container');
-const addListModalClose = document.querySelector('.modal-list-close');
+const listModalContainer = document.querySelector('.modal-list-container');
+const listModalClose = document.querySelector('.modal-list-close');
 
 
 
@@ -20,30 +20,40 @@ function showLists() {
     allLists.forEach((item, index) => {
         const listContainer = document.createElement('div');
         listContainer.classList.add('list-container');
-
         const list = document.createElement('div');
-        list.className = 'group-item';
+        list.className = 'list';
         list.innerText = item.title;
         list.addEventListener('click', setActiveList);
         listContainer.appendChild(list);
 
 
+     
+
         const editListBtn = document.createElement('div');
-        editListBtn.classList.add('list-edit');
+        editListBtn.classList.add('list-options-edit');
         editListBtn.innerText = 'Edit';
         editListBtn.addEventListener('click', editListForm);
         editListBtn.list = item;
-        listContainer.appendChild(editListBtn);
 
 
         const removeListBtn = document.createElement('div');
-        removeListBtn.classList.add('list-remove');
+        removeListBtn.classList.add('list-options-remove');
         removeListBtn.innerText = 'Del';
         removeListBtn.addEventListener('click', () => {
             removeList(index);
             showFirstList();
         });
-        listContainer.appendChild(removeListBtn);
+
+           //options container
+
+           const listOptionsContainer = document.createElement('div');
+           listOptionsContainer.classList.add('list-options-container');
+
+           listOptionsContainer.appendChild(editListBtn);
+           listOptionsContainer.appendChild(removeListBtn);
+
+
+        listContainer.appendChild(listOptionsContainer);
 
 
         listsContainer.appendChild(listContainer);
@@ -84,12 +94,12 @@ function setActiveList(list) {
 }
 
 function showListHeader() {
-    listNameActive.innerText = activeList().title;
+    activeListName.innerText = activeList().title;
 
 }
 //Add List Modal function and listeners
 function newListForm() {
-    addListModalContainer.style.display = 'block';
+    listModalContainer.style.display = 'block';
     const createListBtn = document.getElementById('add-list');
     createListBtn.removeEventListener('click', submitUpdateListForm);
     createListBtn.addEventListener('click', submitListForm);
@@ -101,7 +111,7 @@ function editListForm(evt){
     const editListBtn = document.getElementById('add-list');
 
 
-    addListModalContainer.style.display = 'block';
+    listModalContainer.style.display = 'block';
     listform.title.value = list.title;
     editListBtn.innerText = 'Update';
     editListBtn.removeEventListener('click', submitListForm);
@@ -112,7 +122,7 @@ function editListForm(evt){
 
 function submitUpdateListForm(evt){
 
-    addListModalContainer.style.display = 'none';
+    listModalContainer.style.display = 'none';
     const title = listform.title.value;
     event.preventDefault();
     updateList(evt.currentTarget.list, title);
@@ -122,7 +132,7 @@ function submitUpdateListForm(evt){
 }
 function submitListForm() {
 
-    addListModalContainer.style.display = 'none';
+    listModalContainer.style.display = 'none';
     allLists.forEach((item, index) => {
         item.active = false;
 
@@ -142,7 +152,7 @@ function showReminders() {
 
     activeList().reminders.forEach((item, index) => {
         const reminder = document.createElement('label');
-        reminder.classList.add('container');
+        reminder.classList.add('reminder-container');
         reminder.innerText = item.title;
 
         const checkbox = document.createElement('input');
@@ -153,24 +163,36 @@ function showReminders() {
         reminder.appendChild(checkbox);
 
         const checkIcon = document.createElement('span');
-        checkIcon.classList.add('checkmark');
+        checkIcon.classList.add('reminder-checkmark');
         reminder.appendChild(checkIcon);
 
 
+
+
         const editBtn = document.createElement('div');
-        editBtn.classList.add('edit-reminder');
-        editBtn.innerText = 'edit';
+        editBtn.classList.add('reminder-options-edit');
+        editBtn.innerText = 'Edit';
         editBtn.addEventListener('click', editReminderForm);
         editBtn.reminder = item;
-        reminder.appendChild(editBtn);
 
         const removeBtn = document.createElement('div');
-        removeBtn.classList.add('remove-reminder');
-        removeBtn.innerText = 'remove';
+        removeBtn.classList.add('reminder-options-remove');
+        removeBtn.innerText = 'Remove';
         removeBtn.addEventListener('click', () => {
             removeReminder(index, item.title, item.dueDate, item.priority)
         });
-        reminder.appendChild(removeBtn);
+
+        const reminderOptionsContainer = document.createElement('div');
+        reminderOptionsContainer.classList.add('reminder-options-container');
+
+        reminderOptionsContainer.appendChild(editBtn);
+        reminderOptionsContainer.appendChild(removeBtn);
+
+        reminder.appendChild(reminderOptionsContainer);
+
+
+
+
 
         remindersContainer.appendChild(reminder);
         //TODO: generate reminders here, (title, date, completed status, etc)
@@ -186,7 +208,7 @@ function clearReminders() {
 
 //Add Reminder Modal functions and listeners
 function newReminderForm() {
-    addReminderModalContainer.style.display = 'block';
+    reminderModalContainer.style.display = 'block';
     const createReminderBtn = document.getElementById('add-reminder');
     createReminderBtn.removeEventListener('click', submitUpdateReminderForm);
     createReminderBtn.addEventListener('click', submitReminderForm)
@@ -195,7 +217,7 @@ function newReminderForm() {
 
 function editReminderForm(evt) {
 
-    addReminderModalContainer.style.display = 'block';
+    reminderModalContainer.style.display = 'block';
 
     const reminder = evt.currentTarget.reminder;
 
@@ -214,7 +236,7 @@ function editReminderForm(evt) {
 function submitReminderForm() {
 
     event.preventDefault();
-    addReminderModalContainer.style.display = 'none';
+    reminderModalContainer.style.display = 'none';
     createReminder(reminderform.title.value, reminderform.due.value, reminderform.priority.value);
     reminderform.reset();
 
@@ -229,7 +251,7 @@ function submitUpdateReminderForm(evt){
     event.preventDefault();
     updateReminder(evt.currentTarget.reminder, title, dueDate, priority);
 
-    addReminderModalContainer.style.display = 'none';
+    reminderModalContainer.style.display = 'none';
     reminderform.reset();
 
 }
@@ -243,19 +265,23 @@ function reminderCheckChange(evt){
 }
 
 // shared modal functions
-addReminderModalClose.addEventListener('click', closeModal);
-addListModalClose.addEventListener('click', closeModal);
+reminderModalClose.addEventListener('click', closeModal);
+listModalClose.addEventListener('click', closeModal);
 
 function closeModal() {
-    addReminderModalContainer.style.display = 'none';
-    addListModalContainer.style.display = 'none';
+    reminderModalContainer.style.display = 'none';
+    listModalContainer.style.display = 'none';
     listform.reset();
     reminderform.reset();
 
 }
 
+function toggleReminderModal(){
+    reminderModalContainer
+}
+
 window.onclick = function (event) {
-    if (event.target == addReminderModalContainer || event.target == addListModalContainer) {
+    if (event.target == reminderModalContainer || event.target == listModalContainer) {
         closeModal();
     }
 }
