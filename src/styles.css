@@ -157,6 +157,12 @@ border: solid 1px black;
 
   }
 
+  .edit-reminder{
+    right: 0;
+    position: absolute;
+    padding-right: 100px;
+  }
+
   .remove-reminder{
     margin-left: auto;
     right: 0;
@@ -164,9 +170,7 @@ border: solid 1px black;
 
   }
 
-  .container:last-child {
-    margin-left: auto;
-  }
+
 
 /* footer */
 

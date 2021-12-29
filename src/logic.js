@@ -25,13 +25,29 @@ const createReminder = (title, dueDate, priority) => {
 showReminders();
 };
 
-const removeReminder = (title, dueDate, priority) => {
 
-    const index = activeList().reminders.indexOf({title, dueDate, priority})
+const updateReminder = (reminder, newTitle, newDate, newPriority) => {
+const index = getReminderIndex(reminder);
+
+
+activeList().reminders[index].title = newTitle;
+activeList().reminders[index].dueDate = newDate;
+activeList().reminders[index].priority = newPriority;
+
+showReminders();
+
+
+};
+
+const removeReminder = (index, title, dueDate, priority) => {
+
     activeList().reminders.splice(index, 1);
     showReminders();
 };
 
+function getReminderIndex(item){
+    return activeList().reminders.indexOf(item);
+}
 
 
 function activeList(){
@@ -39,4 +55,4 @@ function activeList(){
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder};
+export {createList, createReminder, activeList, removeReminder, updateReminder, getReminderIndex};

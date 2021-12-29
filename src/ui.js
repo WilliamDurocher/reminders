@@ -1,5 +1,5 @@
 import { allLists } from './index';
-import { activeList, createList, createReminder, removeReminder } from './logic';
+import { activeList, createList, createReminder, removeReminder, updateReminder, getReminderIndex } from './logic';
 
 
 const listContainer = document.querySelector('.group-card');
@@ -34,11 +34,11 @@ function clearLists() {
     listContainer.innerHTML = '';
 }
 
-function setActiveList(list){
+function setActiveList(list) {
     allLists.forEach((item, index) => {
-        if (item.title === list.currentTarget.innerText){
+        if (item.title === list.currentTarget.innerText) {
             item.active = true;
-        }else{
+        } else {
             item.active = false;
         }
     });
@@ -68,11 +68,19 @@ function showReminders() {
         checkIcon.classList.add('checkmark');
         reminder.appendChild(checkIcon);
 
+
+        const editBtn = document.createElement('div');
+        editBtn.classList.add('edit-reminder');
+        editBtn.innerText = 'edit';
+        editBtn.addEventListener('click', editReminderForm);
+        editBtn.reminder = item;
+        reminder.appendChild(editBtn);
+
         const removeBtn = document.createElement('div');
         removeBtn.classList.add('remove-reminder');
         removeBtn.innerText = 'remove';
         removeBtn.addEventListener('click', () => {
-            removeReminder(item.title, item.due, item.priority)
+            removeReminder(index, item.title, item.dueDate, item.priority)
         });
         reminder.appendChild(removeBtn);
 
@@ -110,17 +118,53 @@ function submitListForm() {
 }
 
 //Add Reminder Modal functions and listeners
-function newReminderForm() {
+function newReminderForm(event) {
     addReminderModalContainer.style.display = 'block';
     const createReminderBtn = document.getElementById('add-reminder');
+    createReminderBtn.removeEventListener('click', submitUpdateReminderForm);
     createReminderBtn.addEventListener('click', submitReminderForm)
+
+}
+
+function editReminderForm(evt) {
+
+    addReminderModalContainer.style.display = 'block';
+
+    const reminder = evt.currentTarget.reminder;
+
+    const updateReminderBtn = document.getElementById('add-reminder');
+    updateReminderBtn.removeEventListener('click', submitReminderForm);
+    updateReminderBtn.innerText = 'Update';
+    reminderform.title.value = reminder.title;
+    reminderform.due.value = reminder.dueDate;
+    reminderform.priority.value = reminder.priority;
+    updateReminderBtn.addEventListener('click', submitUpdateReminderForm);
+    updateReminderBtn.reminder = reminder;
+    
 
 }
 
 function submitReminderForm() {
 
+    event.preventDefault();
     addReminderModalContainer.style.display = 'none';
     createReminder(reminderform.title.value, reminderform.due.value, reminderform.priority.value);
+    reminderform.reset();
+
+}
+
+function submitUpdateReminderForm(evt){
+
+    const title = reminderform.title.value;
+    const dueDate = reminderform.due.value;
+    const priority = reminderform.priority.value;
+    const reminderToUpdate = {title, dueDate, priority};
+
+    const index = getReminderIndex(reminderToUpdate);
+    event.preventDefault();
+    updateReminder(evt.currentTarget.reminder, title, dueDate, priority);
+
+    addReminderModalContainer.style.display = 'none';
     reminderform.reset();
 
 }
