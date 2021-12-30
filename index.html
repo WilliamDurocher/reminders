@@ -14,12 +14,14 @@
         <header class="navbar" id="nav">
             <div class="nav-menu">Reminders</div>
             <div class="nav-menu">My Profile</div>
+            
         </header>
         <div class="main-container">
             <div class="side-menu">
                 <div class="lists-container">
                 </div>
                 <div class="lists-footer">
+                    <img class="new-list-icon icon">
                     <div class="new-list">Add List</div>
                 </div>
             </div>
@@ -29,6 +31,7 @@
                 <div class="reminders-container">
                 </div>
                 <div class="reminders-footer">
+                    <img class="new-reminder-icon icon">
                     <div class="new-reminder">Add Reminder</div>
                 </div>
 
@@ -54,7 +57,7 @@
         <div class="modal-list">
             <span class="modal-list-close">&times;</span>
             <form class="modal-content" id="listform" action='/app.js'>
-                <h1>Add a new List</h1>
+                <h1 class="modal-list-title">Add a new List</h1>
                 <div id='textInput'>
                     <p><input type='text' id='title' name='title' placeholder='List Name...' ></p> 
                 </div>
