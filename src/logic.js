@@ -11,6 +11,8 @@ const createList = (title) => {
     showLists();
     showListHeader();
     showReminders();
+    storeData();
+
 };
 
 const updateList = (list, newTitle) => {
@@ -21,12 +23,15 @@ const updateList = (list, newTitle) => {
     showLists();
     showListHeader();
     showReminders();
-    console.log(allLists);
+    storeData();
+    
 }
 
 const removeList = (index) => {
     allLists.splice(index, 1);
     showLists();
+    storeData();
+
 };
 
 const createReminder = (title, dueDate, priority) => {
@@ -39,6 +44,8 @@ const createReminder = (title, dueDate, priority) => {
         checked: false
     });
 showReminders();
+storeData();
+
 };
 
 
@@ -51,7 +58,7 @@ activeList().reminders[index].dueDate = newDate;
 activeList().reminders[index].priority = newPriority;
 
 showReminders();
-
+storeData();
 
 };
 
@@ -59,16 +66,21 @@ const removeReminder = (index) => {
 
     activeList().reminders.splice(index, 1);
     showReminders();
+    storeData();
+
 };
 
 const checkReminder = (index, reminder) => {
 
     if (reminder.checked){
-        activeList().reminders[index].checked = true;
-    }else{
         activeList().reminders[index].checked = false;
+    }else{
+        activeList().reminders[index].checked = true;
 
     }
+    showReminders();
+    storeData();
+
 
 };
 
@@ -80,10 +92,14 @@ function getListIndex(list){
     return allLists.indexOf(list);
 }
 
+function storeData(){
+    window.localStorage.setItem('reminders', JSON.stringify(allLists));
+}
+
 
 function activeList(){
     let activeListArray = allLists.filter(list => list.active);
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList};
+export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList, storeData};
