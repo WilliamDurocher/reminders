@@ -13,7 +13,7 @@
     <div id="content">
         <header class="navbar" id="nav">
             <div class="nav-menu">Reminders</div>
-            <div class="nav-menu">My Profile</div>
+            <div class="nav-menu">Information</div>
             
         </header>
         <div class="main-container">
@@ -40,13 +40,12 @@
     </div>
     <div class="modal-reminder-container">
         <div class="modal-reminder">
-            <span class="modal-reminder-close">&times;</span>
+            <span class="modal-close" id="closeReminder">&times;</span>
             <form class="modal-content" id="reminderform" action='/app.js'>
                 <h1 class="modal-reminder-title">Add a new reminder</h1>
                 <div id='textInput'>
                     <p><input type='text' id='title' name='title' placeholder='Remind Me to...'></p>
-                    <p><input type='text' id='due' name='due' placeholder='Due on...' ></p>
-                    <!-- <p><input type='text' id='priority' name='priority' placeholder='Priority'></p> -->
+                    <p><input type='date' id='due' name='due' class="reminder-datepicker"></p>
                     <div class="priority-container">
                         <input type="radio" name="priority" value="low" id="r1" checked="checked"/>
                         <label class="low" for="r1">Low</label>
@@ -57,8 +56,6 @@
                         <input type="radio" name="priority" value="high" id="r3"/>
                         <label class="high" for="r3">High</label>
                     </div>
-
-    
                 </div>
                 <button type='submit' form='reminderform' id="add-reminder" class="modal-reminder-btn">Add</button>
             </form>
@@ -66,13 +63,13 @@
     </div>
     <div class="modal-list-container">
         <div class="modal-list">
-            <span class="modal-list-close">&times;</span>
+            <span class="modal-close" id="closeList">&times;</span>
             <form class="modal-content" id="listform" action='/app.js'>
                 <h1 class="modal-list-title">Add a new List</h1>
                 <div id='textInput'>
                     <p><input type='text' id='title' name='title' placeholder='List Name...' ></p> 
                 </div>
-                <button type='submit' form='listform' id="add-list">Add</button>
+                <button type='submit' form='listform' id="add-list" class="modal-list-btn">Add</button>
             </form>
         </div>
     </div>

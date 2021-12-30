@@ -84,6 +84,20 @@ const checkReminder = (index, reminder) => {
 
 };
 
+function getPriorityColor(priority){
+
+    switch(priority){
+        case 'low':
+             return '--low-priority';
+        case 'medium':
+             return '--medium-priority';
+        case 'high':
+             return '--high-priority';
+        default:
+            return 'black';
+    }
+}
+
 function getReminderIndex(item){
     return activeList().reminders.indexOf(item);
 }
@@ -102,4 +116,4 @@ function activeList(){
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList, storeData};
+export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList, storeData, getPriorityColor};

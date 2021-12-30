@@ -1,7 +1,7 @@
 import { allLists } from './index';
 import {
     activeList, createList, createReminder, removeReminder, updateReminder, checkReminder, removeList,
-    updateList
+    updateList, getPriorityColor
 } from './logic';
 import editBtnSrc from './assets/edit-regular.svg';
 import removeBtnSrc from './assets/minus-circle-solid.svg';
@@ -9,6 +9,8 @@ import addListBtnSrc from './assets/clipboard-check-solid.svg';
 import addReminderBtnSrc from './assets/list-ul-solid.svg';
 
 
+// const root = document.querySelector(':root');
+// const rootStyles = window.getComputedStyles(root);
 
 const listsContainer = document.querySelector('.lists-container');
 const activeListName = document.querySelector('.reminders-header-title');
@@ -16,11 +18,11 @@ const remindersContainer = document.querySelector('.reminders-container');
 
 const reminderModalContainer = document.querySelector('.modal-reminder-container');
 const reminderFormTitle = document.querySelector('.modal-reminder-title');
-const reminderModalClose = document.querySelector('.modal-reminder-close');
+const reminderModalClose = document.getElementById('closeReminder');
 
 const listModalContainer = document.querySelector('.modal-list-container');
 const listFormTitle = document.querySelector('.modal-list-title');
-const listModalClose = document.querySelector('.modal-list-close');
+const listModalClose = document.getElementById('closeList');
 
 
 
@@ -164,6 +166,13 @@ function showReminders() {
     clearReminders();
     showListHeader();
 
+    if (activeList().reminders.length == 0){
+
+        const emptyView = document.createElement('div');
+        //TODO: add class, make event that pops the new reminder page, make it clickable from the whole page
+        emptyView.innerText = "empty";
+        remindersContainer.appendChild(emptyView);
+    }else{
 
     activeList().reminders.forEach((item, index) => {
 
@@ -187,10 +196,18 @@ function showReminders() {
         checkbox.reminder = item;
 
 
-
         const reminderLabel = document.createElement('div');
         reminderLabel.innerText = item.title;
+
+
+        const reminderDetails = document.createElement('div');
+        reminderDetails.innerText = item.dueDate;
+        reminderDetails.classList.add('reminder-details');
+        reminderDetails.style.backgroundColor = getPriorityColor(item.priority); //todo not working
+        //TODO: get priority color (func), set color as variable for background of date
+
         reminderLabel.appendChild(checkbox);
+        reminderLabel.appendChild(reminderDetails);
 
         const reminderInfoContainer = document.createElement('div');
         reminderInfoContainer.classList.add('reminder-info-container');
@@ -222,6 +239,8 @@ function showReminders() {
         remindersContainer.appendChild(reminderContainer);
     })
 
+}
+
     const remindersFooterContainer = document.querySelector('.reminders-footer');
     const addReminderBtnIcon = document.querySelector('.new-reminder-icon');
     addReminderBtnIcon.src = addReminderBtnSrc;
@@ -238,6 +257,7 @@ function newReminderForm() {
     const createReminderBtn = document.getElementById('add-reminder');
     reminderFormTitle.innerText = 'Add a new Reminder';
     createReminderBtn.innerText = 'Add';
+    document.querySelector('.reminder-datepicker').value = new Date().toISOString().slice(0, 10);
     createReminderBtn.removeEventListener('click', submitUpdateReminderForm);
     createReminderBtn.addEventListener('click', submitReminderForm)
 

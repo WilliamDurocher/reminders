@@ -1,5 +1,28 @@
+:root{
+  --low-priority: green;
+  --medium-priority: rgb(230, 179, 13);
+  --high-priority: red;
+  --modal-window-color:#cfcfcf;
+  --checked-blue: #2196F3;
+  --background-color: grey;
+  --navbar-color: #333;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
+}
+
 body {
-  background-color: grey;
+  background-color: var(--background-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -9,7 +32,7 @@ body {
 .navbar {
   display: flex;
   height: 45px;
-  background-color: #333;
+  background-color: var(--navbar-color);
 
 }
 
@@ -68,10 +91,12 @@ body {
 
 .list {
   height: 40px;
+  line-height: 40px;
 }
 
 .list-options-container {
   display: flex;
+  padding-top: 10px;
 }
 
 /*todo: icon */
@@ -109,7 +134,7 @@ body {
 }
 
 .reminders-header-title {
-  font-size: 30px;
+  font-size: 35px;
   padding: 20px;
 }
 
@@ -125,6 +150,16 @@ TODO: header settings ?
 }
 
 /*** REMINDER ***/
+
+.reminder-details{
+  margin-top: 10px;
+  font-size: 12px;
+  border: solid 1px black;
+  max-width: 69px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
 
 .reminder-info-container {
   display: flex;
@@ -142,11 +177,8 @@ TODO: header settings ?
   justify-content: space-between;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
+  margin-bottom: 19px;
   font-size: 22px;
-
-
-
 
 }
 
@@ -170,14 +202,14 @@ TODO: header settings ?
   border-radius: 50px;
 }
 
-/* On mouse-over, add a grey background color */
+/* On mouse-over, add a var(--background-color) background color */
 .reminder-checkmark:hover {
   cursor: pointer;
 }
 
 
 .checkbox-checked {
-  background-color: #2196F3;
+  background-color: var(--checked-blue);
   box-sizing: border-box;
   border: 1px solid white;
 }
@@ -249,13 +281,11 @@ TODO: header settings ?
   -webkit-transition: all 0.5s linear;
 }
 
-.modal-reminder-container {
-  display: block;
-}
+
 
 .modal-reminder {
 
-  background-color: #cfcfcf;
+  background-color: var(--modal-window-color);
   margin: auto;
   padding: 30px;
   border-radius: 30px;
@@ -268,13 +298,17 @@ TODO: header settings ?
   padding-bottom: 80px;
 }
 
-.modal-reminder-btn {
+.modal-reminder-btn, .modal-list-btn{
   width: 150px;
   height: 50px;
   border-radius: 15px;
-  background-color: #2196F3;
+  background-color: black;
   font-size: 21px;
+  border-style: solid;
+  color: white;
 }
+
+
 
 button:hover {
   cursor: pointer;
@@ -288,8 +322,8 @@ button:hover {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
-  border-bottom-color: #2196F3;
-  background-color: #cfcfcf;
+  border-bottom-color: var(--checked-blue);
+  background-color: var(--modal-window-color);
 }
 
 #textInput input:hover {
@@ -297,25 +331,31 @@ button:hover {
 }
 
 #textInput p {
-
   height: 50px;
 }
 
 .modal-list {
-  background-color: #fefefe;
+  background-color: var(--modal-window-color);
   margin: auto;
   padding: 20px;
   border-radius: 15px;
-  max-width: 800px;
-  height: 350px;
+  max-width: 400px;
+  height: 300px;
 
+}
+.modal-list-title{
+padding-bottom: 20px;
 }
 
 .modal-content {
   text-align: center;
 }
 
-.modal-list-close, .modal-reminder-close:hover {
+.modal-close{
+/* todo: change size, background border  */
+}
+
+.modal-close:hover {
   cursor: pointer;
 }
 
@@ -332,7 +372,7 @@ img {
 .priority-container {
   display: flex;
   justify-content: center;
-  gap: 35px;
+  gap: 30px;
   padding-bottom: 20px;
 }
 
@@ -352,35 +392,35 @@ img {
 }
 
 .priority-container input[type=radio]:checked + .low{
-  background-color: green;
+  background-color: var(--low-priority);
   color: white;
 }
 .priority-container input[type=radio]:checked + .medium{
-  background-color: rgb(230, 179, 13);
+  background-color: var(--medium-priority);
   color: white;
 
 }
 .priority-container input[type=radio]:checked + .high{
-  background-color: red;
+  background-color: var(--high-priority);
   color: white;
 
 }
 
 .low{
-  color: green;
-  border: 1px solid green;
+  color: var(--low-priority);
+  border: 1px solid var(--low-priority);
 
 }
 
 .medium{
-  color: rgb(230, 179, 13);
-  border: 1px solid rgb(230, 179, 13);
+  color: var(--medium-priority);
+  border: 1px solid var(--medium-priority);
 
 }
 
 .high{
-  color: red;
-  border: 1px solid red;
+  color: var(--high-priority);
+  border: 1px solid var(--high-priority);
 
 }
 
@@ -391,17 +431,3 @@ img {
 .list-container:hover img {
   display: block;
 }
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #2196F3;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #2196F3;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: #2196F3;
-}
-
