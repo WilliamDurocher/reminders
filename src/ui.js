@@ -263,6 +263,7 @@ function editReminderForm(evt) {
 
 function submitReminderForm() {
 
+    console.log(reminderform);
     event.preventDefault();
     reminderModalContainer.style.display = 'none';
     createReminder(reminderform.title.value, reminderform.due.value, reminderform.priority.value);
@@ -319,4 +320,4 @@ window.onclick = function (event) {
 
 
 
-export { showLists, showListHeader, showReminders };
+export { showLists, showReminders , showFirstList, showListHeader};

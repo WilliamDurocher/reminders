@@ -1,6 +1,6 @@
 import './styles.css';
 import { createList, createReminder } from './logic';
-import { showLists, showListHeader, showReminders } from './ui';
+import { showLists, showReminders, showFirstList} from './ui';
 
 let allLists = [];
 
@@ -10,9 +10,9 @@ if (!localStorage.getItem('reminders')) {
     createReminder('My new reminder', '2021-12-31', 'low');
 }else{
     allLists = JSON.parse(window.localStorage.getItem('reminders'));
-    showReminders();
-    showListHeader();
+    console.log(allLists)
     showLists();
+    showFirstList();
 }
 
 

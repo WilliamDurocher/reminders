@@ -44,12 +44,23 @@
             <form class="modal-content" id="reminderform" action='/app.js'>
                 <h1 class="modal-reminder-title">Add a new reminder</h1>
                 <div id='textInput'>
-                    <p><input type='text' id='title' name='title' placeholder='Remind me of...'></p>
+                    <p><input type='text' id='title' name='title' placeholder='Remind Me to...'></p>
                     <p><input type='text' id='due' name='due' placeholder='Due on...' ></p>
-                    <p><input type='text' id='priority' name='priority' placeholder='priority'></p>
+                    <!-- <p><input type='text' id='priority' name='priority' placeholder='Priority'></p> -->
+                    <div class="priority-container">
+                        <input type="radio" name="priority" value="low" id="r1" checked="checked"/>
+                        <label class="low" for="r1">Low</label>
+
+                        <input type="radio" name="priority" value="medium" id="r2"/>
+                        <label class="medium" for="r2">Medium</label>
+
+                        <input type="radio" name="priority" value="high" id="r3"/>
+                        <label class="high" for="r3">High</label>
+                    </div>
+
     
                 </div>
-                <button type='submit' form='reminderform' id="add-reminder">Add</button>
+                <button type='submit' form='reminderform' id="add-reminder" class="modal-reminder-btn">Add</button>
             </form>
         </div>
     </div>
