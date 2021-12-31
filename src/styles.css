@@ -1,10 +1,10 @@
 :root{
-  --low-priority: green;
-  --medium-priority: rgb(230, 179, 13);
-  --high-priority: red;
+  --low-priority: #18A558;
+  --medium-priority: #FAD02C;
+  --high-priority: #D01110;
   --modal-window-color:#cfcfcf;
   --checked-blue: #2196F3;
-  --background-color: grey;
+  --background-color: white;
   --navbar-color: #333;
 }
 
@@ -75,6 +75,7 @@ body {
   margin: 15px auto;
   padding: 10px;
   position: relative;
+  background-color: lightgray;
 }
 
 .list-container {
@@ -120,6 +121,9 @@ body {
   border: solid 1px black;
 
 }
+.active-list{
+  background-color: red;
+}
 
 /*** ACTIVE LIST HEADER ***/
 .reminders-header-title {
@@ -128,16 +132,33 @@ body {
   width: 100%;
 
 }
-
+.reminders-header-count{
+  padding-left: 25px;
+  padding-bottom: 25px;
+  font-size: 14px;
+  vertical-align: top;
+}
 .reminders-header-title:last-child {
   margin-left: auto;
 }
 
 .reminders-header-title {
-  font-size: 35px;
-  padding: 20px;
+  font-size: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+
 }
 
+.reminders-empty-view{
+  width: 100%;
+  text-align: center;
+  height: 80vh;
+  line-height: 80vh;
+  font-size: 32px;
+  color: darkgray;
+
+}
 /*
 TODO: header settings ?
 */
@@ -154,17 +175,16 @@ TODO: header settings ?
 .reminder-details{
   margin-top: 10px;
   font-size: 12px;
-  border: solid 1px black;
   max-width: 69px;
   padding: 10px;
   border-radius: 20px;
+  color: white;
 }
 
 
 .reminder-info-container {
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -186,7 +206,6 @@ TODO: header settings ?
 .reminder-container input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
   height: 0;
   width: 0;
 }
@@ -215,9 +234,8 @@ TODO: header settings ?
 }
 
 .checkbox-unchecked {
-  background-color: #eee;
+  background-color: lightgray;
   box-sizing: border-box;
-  border: 1px solid white;
 }
 
 .reminder-options-container {
@@ -262,9 +280,9 @@ TODO: header settings ?
 }
 
 
-/*** LISTS / REMINDERS MODALs ***/
+/*** LISTS / REMINDERS MODALS ***/
 
-.modal-reminder-container, .modal-list-container {
+.modal-reminder-container, .modal-list-container, .modal-info-container {
   display: none;
   position: fixed;
   left: 0;
@@ -322,7 +340,7 @@ button:hover {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
-  border-bottom-color: var(--checked-blue);
+  border-bottom-color: black;
   background-color: var(--modal-window-color);
 }
 
@@ -332,41 +350,6 @@ button:hover {
 
 #textInput p {
   height: 50px;
-}
-
-.modal-list {
-  background-color: var(--modal-window-color);
-  margin: auto;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 400px;
-  height: 300px;
-
-}
-.modal-list-title{
-padding-bottom: 20px;
-}
-
-.modal-content {
-  text-align: center;
-}
-
-.modal-close{
-/* todo: change size, background border  */
-}
-
-.modal-close:hover {
-  cursor: pointer;
-}
-
-.icon {
-  width: 22px;
-  height: 22px;
-}
-
-
-img {
-  cursor: pointer;
 }
 
 .priority-container {
@@ -405,7 +388,14 @@ img {
   color: white;
 
 }
+.priority-container *:hover{
+cursor: pointer;
+}
 
+.reminder-datepicker:hover{
+  cursor: pointer;
+
+}
 .low{
   color: var(--low-priority);
   border: 1px solid var(--low-priority);
@@ -428,6 +418,56 @@ img {
   display: block;
 }
 
+.modal-list {
+  background-color: var(--modal-window-color);
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  height: 300px;
+
+}
+.modal-list-title{
+padding-bottom: 20px;
+
+}
 .list-container:hover img {
   display: block;
 }
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-close{
+font-size: 28px;
+}
+
+.modal-close:hover {
+  cursor: pointer;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+
+img {
+  cursor: pointer;
+}
+
+.modal-info {
+  background-color: var(--modal-window-color);
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  height: 300px;
+
+}
+
+
+
+
+

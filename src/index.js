@@ -6,8 +6,11 @@ let allLists = [];
 
 
 if (!localStorage.getItem('reminders')) {
-    createList("New List");
-    createReminder('My new reminder', '2021-12-31', 'low');
+    createList("Groceries");
+    createReminder('Fruits', '2025-12-31', 'low');
+    createReminder('Bacon', '2025-12-31', 'medium');
+    createReminder('Pizza', '2025-12-31', 'high');
+
 }else{
     allLists = JSON.parse(window.localStorage.getItem('reminders'));
     console.log(allLists)

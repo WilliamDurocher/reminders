@@ -1,6 +1,9 @@
 import { allLists } from './index';
 import {showLists, showListHeader, showReminders} from './ui';
 
+const root = document.querySelector(':root');
+const rootStyles = getComputedStyle(root);
+
 const createList = (title) => {
 
     allLists.push({
@@ -86,13 +89,14 @@ const checkReminder = (index, reminder) => {
 
 function getPriorityColor(priority){
 
+
     switch(priority){
         case 'low':
-             return '--low-priority';
+             return rootStyles.getPropertyValue('--low-priority');
         case 'medium':
-             return '--medium-priority';
+             return rootStyles.getPropertyValue('--medium-priority');
         case 'high':
-             return '--high-priority';
+             return rootStyles.getPropertyValue('--high-priority');
         default:
             return 'black';
     }

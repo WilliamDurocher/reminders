@@ -10,7 +10,7 @@ import addReminderBtnSrc from './assets/list-ul-solid.svg';
 
 
 // const root = document.querySelector(':root');
-// const rootStyles = window.getComputedStyles(root);
+// const rootStyles = getComputedStyle(root);
 
 const listsContainer = document.querySelector('.lists-container');
 const activeListName = document.querySelector('.reminders-header-title');
@@ -24,10 +24,15 @@ const listModalContainer = document.querySelector('.modal-list-container');
 const listFormTitle = document.querySelector('.modal-list-title');
 const listModalClose = document.getElementById('closeList');
 
+const infoModalContainer = document.querySelector('.modal-info-container');
+const infoModalClose = document.getElementById('closeInfo');
+const infoBtn = document.getElementById('info');
+infoBtn.addEventListener('click', showInfoModal);
 
 
 function showLists() {
     clearLists();
+
     allLists.forEach((item, index) => {
         const listContainer = document.createElement('div');
         listContainer.classList.add('list-container');
@@ -70,12 +75,14 @@ function showLists() {
         listsContainer.appendChild(listContainer);
 
     });
+}
     const listsFooterContainer = document.querySelector('.lists-footer');
+    listsFooterContainer.style.display = '';
     const addListIcon = document.querySelector('.new-list-icon');
     addListIcon.src = addListBtnSrc;
     listsFooterContainer.addEventListener('click', newListForm);
 
-}
+
 
 function clearLists() {
     listsContainer.innerHTML = '';
@@ -101,6 +108,8 @@ function setActiveList(list) {
             item.active = true;
         } else {
             item.active = false;
+
+
         }
     });
     showReminders();
@@ -108,6 +117,9 @@ function setActiveList(list) {
 
 function showListHeader() {
     activeListName.innerText = activeList().title;
+    const reminderCount = document.querySelector('.reminders-header-count');
+    const count = activeList().reminders.length;
+    reminderCount.innerText = count > 1 ? `${count} Reminders`: `${count} Reminder` ;
 
 }
 //Add List Modal function and listeners
@@ -168,9 +180,12 @@ function showReminders() {
 
     if (activeList().reminders.length == 0){
 
+        hideRemindersFooter();
         const emptyView = document.createElement('div');
+        emptyView.classList.add('reminders-empty-view');
         //TODO: add class, make event that pops the new reminder page, make it clickable from the whole page
-        emptyView.innerText = "empty";
+        emptyView.innerText = "Add new Reminder";
+        emptyView.addEventListener('click', newReminderForm);
         remindersContainer.appendChild(emptyView);
     }else{
 
@@ -203,7 +218,7 @@ function showReminders() {
         const reminderDetails = document.createElement('div');
         reminderDetails.innerText = item.dueDate;
         reminderDetails.classList.add('reminder-details');
-        reminderDetails.style.backgroundColor = getPriorityColor(item.priority); //todo not working
+        reminderDetails.style.backgroundColor = getPriorityColor(item.priority); 
         //TODO: get priority color (func), set color as variable for background of date
 
         reminderLabel.appendChild(checkbox);
@@ -238,13 +253,15 @@ function showReminders() {
 
         remindersContainer.appendChild(reminderContainer);
     })
-
-}
-
     const remindersFooterContainer = document.querySelector('.reminders-footer');
+    remindersFooterContainer.style.display = '';
     const addReminderBtnIcon = document.querySelector('.new-reminder-icon');
     addReminderBtnIcon.src = addReminderBtnSrc;
     remindersFooterContainer.addEventListener('click', newReminderForm);
+
+}
+
+
 }
 
 function clearReminders() {
@@ -316,12 +333,27 @@ function reminderCheckChange(evt) {
 // shared modal functions
 reminderModalClose.addEventListener('click', closeModal);
 listModalClose.addEventListener('click', closeModal);
+infoModalClose.addEventListener('click', closeModal);
 
 function closeModal() {
     reminderModalContainer.style.display = 'none';
     listModalContainer.style.display = 'none';
+    infoModalContainer.style.display = 'none';
     listform.reset();
     reminderform.reset();
+
+}
+
+function hideRemindersFooter(){
+    const remindersFooter = document.querySelector('.reminders-footer');
+
+    if (remindersFooter){
+        remindersFooter.style.display = 'none';
+    }
+}
+
+function showInfoModal(){
+    infoModalContainer.style.display = 'block';
 
 }
 
@@ -333,7 +365,7 @@ function toggleListsModal() {
     //TODO
 }
 window.onclick = function (event) {
-    if (event.target == reminderModalContainer || event.target == listModalContainer) {
+    if (event.target == reminderModalContainer || event.target == listModalContainer || event.target == infoModalContainer) {
         closeModal();
     }
 }
