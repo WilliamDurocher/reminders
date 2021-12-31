@@ -1,6 +1,7 @@
 import { allLists } from './index';
-import {showLists, showListHeader, showReminders} from './ui';
+import { lists, reminders } from './ui';
 
+//variable initialization, to get styles variables
 const root = document.querySelector(':root');
 const rootStyles = getComputedStyle(root);
 
@@ -9,36 +10,33 @@ const createList = (title) => {
     allLists.push({
         title,
         reminders: [],
-        active: allLists.size > 1 ? false: true,
+        active: allLists.size > 1 ? false : true,
     });
-    showLists();
-    showListHeader();
-    showReminders();
+    lists.show();
+    reminders.show();
     storeData();
 
 };
 
 const updateList = (list, newTitle) => {
-    const index = getListIndex(list);
 
+    const index = getListIndex(list);
     allLists[index].title = newTitle;
 
-    showLists();
-    showListHeader();
-    showReminders();
+    lists.show();
+    reminders.show();
     storeData();
-    
+
 }
 
 const removeList = (index) => {
     allLists.splice(index, 1);
-    showLists();
     storeData();
+    lists.showFirst();
 
 };
 
 const createReminder = (title, dueDate, priority) => {
-//TODO Local Storage
 
     activeList().reminders.push({
         title,
@@ -46,78 +44,78 @@ const createReminder = (title, dueDate, priority) => {
         priority,
         checked: false
     });
-showReminders();
-storeData();
+    reminders.show();
+    storeData();
 
 };
 
 
 const updateReminder = (reminder, newTitle, newDate, newPriority) => {
-const index = getReminderIndex(reminder);
+    const index = getReminderIndex(reminder);
 
 
-activeList().reminders[index].title = newTitle;
-activeList().reminders[index].dueDate = newDate;
-activeList().reminders[index].priority = newPriority;
+    activeList().reminders[index].title = newTitle;
+    activeList().reminders[index].dueDate = newDate;
+    activeList().reminders[index].priority = newPriority;
 
-showReminders();
-storeData();
+    reminders.show();
+    storeData();
 
 };
 
 const removeReminder = (index) => {
 
     activeList().reminders.splice(index, 1);
-    showReminders();
+    reminders.show();
     storeData();
 
 };
 
 const checkReminder = (index, reminder) => {
 
-    if (reminder.checked){
+    if (reminder.checked) {
         activeList().reminders[index].checked = false;
-    }else{
+    } else {
         activeList().reminders[index].checked = true;
 
     }
-    showReminders();
+    reminders.show();
     storeData();
 
 
 };
 
-function getPriorityColor(priority){
+function getPriorityColor(priority) {
 
 
-    switch(priority){
+    switch (priority) {
         case 'low':
-             return rootStyles.getPropertyValue('--low-priority');
+            return rootStyles.getPropertyValue('--low-priority');
         case 'medium':
-             return rootStyles.getPropertyValue('--medium-priority');
+            return rootStyles.getPropertyValue('--medium-priority');
         case 'high':
-             return rootStyles.getPropertyValue('--high-priority');
+            return rootStyles.getPropertyValue('--high-priority');
         default:
             return 'black';
     }
 }
 
-function getReminderIndex(item){
+function getReminderIndex(item) {
     return activeList().reminders.indexOf(item);
 }
 
-function getListIndex(list){
+function getListIndex(list) {
     return allLists.indexOf(list);
 }
 
-function storeData(){
+function storeData() {
     window.localStorage.setItem('reminders', JSON.stringify(allLists));
 }
 
 
-function activeList(){
+function activeList() {
     let activeListArray = allLists.filter(list => list.active);
     return activeListArray[0];
 }
 
-export {createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList, storeData, getPriorityColor};
+export { createList, createReminder, activeList, removeReminder, updateReminder, checkReminder, removeList, updateList, storeData, getPriorityColor };

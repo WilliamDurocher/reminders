@@ -133,6 +133,7 @@ body {
 
 }
 .reminders-header-count{
+  padding-top: 10px;
   padding-left: 25px;
   padding-bottom: 25px;
   font-size: 14px;
@@ -221,10 +222,7 @@ TODO: header settings ?
   border-radius: 50px;
 }
 
-/* On mouse-over, add a var(--background-color) background color */
-.reminder-checkmark:hover {
-  cursor: pointer;
-}
+
 
 
 .checkbox-checked {
@@ -266,18 +264,6 @@ TODO: header settings ?
   padding-left: 20px;
 }
 
-/*
-.new-reminder{
-
-}
-
-.new-list{
-
-}
-*/
-.new-reminder:hover, .new-list:hover {
-  cursor: pointer;
-}
 
 
 /*** LISTS / REMINDERS MODALS ***/
@@ -326,13 +312,6 @@ TODO: header settings ?
   color: white;
 }
 
-
-
-button:hover {
-  cursor: pointer;
-
-}
-
 #textInput input {
   height: 30px;
   width: 300px;
@@ -366,10 +345,6 @@ button:hover {
   border-radius: 7px;
 }
 
-.priority-container .radio:hover{
-  cursor: pointer;
-  /*Todo: animation that changes the background color to the priority color and text color white*/
-}
 .priority-container input[type=radio] {
   display:none ;
 }
@@ -388,14 +363,9 @@ button:hover {
   color: white;
 
 }
-.priority-container *:hover{
-cursor: pointer;
-}
 
-.reminder-datepicker:hover{
-  cursor: pointer;
 
-}
+
 .low{
   color: var(--low-priority);
   border: 1px solid var(--low-priority);
@@ -443,19 +413,11 @@ padding-bottom: 20px;
 font-size: 28px;
 }
 
-.modal-close:hover {
-  cursor: pointer;
-}
-
 .icon {
   width: 22px;
   height: 22px;
 }
 
-
-img {
-  cursor: pointer;
-}
 
 .modal-info {
   background-color: var(--modal-window-color);
@@ -463,10 +425,16 @@ img {
   padding: 20px;
   border-radius: 15px;
   max-width: 400px;
-  height: 300px;
+  height: 250px;
 
 }
 
+.hover:hover, button:hover, img:hover, .priority-container *:hover{
+  cursor: pointer;
+}
+.list-container:hover{
+  font-weight: 700;
+}
 
 
 

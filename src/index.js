@@ -1,23 +1,23 @@
 import './styles.css';
 import { createList, createReminder } from './logic';
-import { showLists, showReminders, showFirstList} from './ui';
-
-let allLists = [];
+import { lists } from './ui';
 
 
+let allLists = [];  // main application object: lists array, containing list information and reminders
+
+
+// if we do not have localstorage yet or is not available, setup default Reminders page
 if (!localStorage.getItem('reminders')) {
+    createList("My New Reminders List");
+    createReminder('This is my reminders', '2025-12-31', 'low');
+    createReminder('You can see the date that the reminder is due', '2025-12-31', 'medium');
+    createReminder('And the priority it has been set in', '2025-12-31', 'high');
+    createReminder('You can also create, update and remove any Reminder or List', '2025-12-31', 'low');
     createList("Groceries");
-    createReminder('Fruits', '2025-12-31', 'low');
-    createReminder('Bacon', '2025-12-31', 'medium');
-    createReminder('Pizza', '2025-12-31', 'high');
-
 }else{
     allLists = JSON.parse(window.localStorage.getItem('reminders'));
-    console.log(allLists)
-    showLists();
-    showFirstList();
+    lists.show();
+    lists.showFirst();
 }
-
-
 
 export { allLists };
