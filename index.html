@@ -13,7 +13,7 @@
     <div id="content">
         <header class="navbar" id="nav">
             <div class="nav-menu">Reminders</div>
-            <div class="nav-menu">Information</div>
+            <div class="nav-menu" id="info">Information</div>
             
         </header>
         <div class="main-container">
@@ -28,6 +28,7 @@
             <div class="main-menu">
                 <div class="reminders-header-title">
                 </div>
+                <div class="reminders-header-count"></div>
                 <div class="reminders-container">
                 </div>
                 <div class="reminders-footer">
@@ -71,6 +72,22 @@
                 </div>
                 <button type='submit' form='listform' id="add-list" class="modal-list-btn">Add</button>
             </form>
+        </div>
+    </div>
+    <div class="modal-info-container">
+        <div class="modal-info">
+            <span class="modal-close" id="closeInfo">&times;</span>
+            <div class="modal-content">
+                <h1 class="modal-info-title">Information</h1>
+                <div>
+                    <p>Design Inspired by the Apple Reminders web app</p>
+                    <p>App built by William Durocher, 2021</p>
+                    <p>All Icons provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+
+
+
+                </div>
+            </div>
         </div>
     </div>
     <script src="main.js"></script>
