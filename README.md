@@ -2,6 +2,7 @@
 
 ### A simple Reminders app made with Vanilla JS
 
+![Reminders](https://user-images.githubusercontent.com/35932018/147855901-e3627d5f-7cc2-41fa-8e9d-f5696ba3e812.png)
 
 
 ## Built With 
