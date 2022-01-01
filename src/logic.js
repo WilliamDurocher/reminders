@@ -87,7 +87,6 @@ const checkReminder = (index, reminder) => {
 
 function getPriorityColor(priority) {
 
-
     switch (priority) {
         case 'low':
             return rootStyles.getPropertyValue('--low-priority');
